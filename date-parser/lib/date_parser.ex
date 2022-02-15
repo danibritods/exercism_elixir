@@ -16,7 +16,7 @@ defmodule DateParser do
   end
 
   def month_names() do
-    "^((Jan|Febr)uary|March|April|May|June|July|August|October|(Sept|Nov|Dec)ember)$"
+    "((Jan|Febr)uary|March|April|May|June|July|August|October|(Sept|Nov|Dec)ember)"
   end
 
   def capture_day() do
@@ -44,22 +44,22 @@ defmodule DateParser do
   end
 
   def capture_month_name_date() do
-    # Please implement the capture_month_name_date/0 function
+    "#{capture_month_name()} #{capture_day()}, #{capture_year()}"
   end
 
   def capture_day_month_name_date() do
-    # Please implement the capture_day_month_name_date/0 function
+    "#{capture_day_name()}, #{capture_month_name()} #{capture_day()}, #{capture_year()}"
   end
 
   def match_numeric_date() do
-    # Please implement the match_numeric_date/0 function
+    ~r"^(#{capture_numeric_date()})$"
   end
 
   def match_month_name_date() do
-    # Please implement the match_month_name_day/0 function
+    ~r"^(#{capture_month_name_date()})$"
   end
 
   def match_day_month_name_date() do
-    # Please implement the match_day_month_name_date/0 function
+    ~r"^(#{capture_day_month_name_date()})$"
   end
 end
