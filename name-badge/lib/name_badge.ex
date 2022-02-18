@@ -1,15 +1,10 @@
 defmodule NameBadge do
-  def print(id, name, _department) when _department == nil do
-    if id do
-      "[#{id}] - #{name} - OWNER"
-    else
-      "#{name} - OWNER"
-    end
-  end
-  def print(_id, name, department) when _id == nil do
-    "#{name} - #{String.upcase(department)}"
-  end
+  defp get_id(id),do:
+    if id, do: "[#{id}] - ", else: ""
+  defp get_department(department),do:
+    if department, do: " - #{String.upcase(department)}", else: " - OWNER"
+  @spec print(any, binary, any) :: binary
   def print(id, name, department) do
-    "[#{id}] - #{name} - #{String.upcase(department)}"
+    get_id(id)<>name<>get_department(department)
   end
 end
