@@ -3,7 +3,6 @@ defmodule NameBadge do
     if id, do: "[#{id}] - ", else: ""
   defp get_department(department),do:
     if department, do: " - #{String.upcase(department)}", else: " - OWNER"
-  @spec print(any, binary, any) :: binary
   def print(id, name, department) do
     get_id(id)<>name<>get_department(department)
   end
