@@ -1,20 +1,18 @@
 defmodule TakeANumber do
-  #defp machine(state) when state == 0,do: 0
-  defp machine(init \\ nil) do
-    if init == 0 do
-      s = 0
-    else
-      s = s + 1
-    end
+  defp machine(s \\ 0) do
+    state = s
     receive do
       {:report_state, sender_pid} ->
-        send(sender_pid,s)
+        send(sender_pid,state)
       {:take_a_number, sender_pid} ->
-        send(sender_pid, machine())
+        send(sender_pid, state + 1)
+        machine(s + 1)
+      {:stop, _sender_pid} ->
+        nil
     end
-    s
+
   end
   def start() do
-    spawn(machine(0))
+    spawn(machine())
   end
 end
