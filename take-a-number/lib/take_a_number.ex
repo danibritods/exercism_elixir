@@ -1,4 +1,6 @@
 defmodule TakeANumber do
+  @initial_state 0
+
   defp loop(state) do
     receive do
       {:report_state, sender_pid} ->
@@ -14,10 +16,7 @@ defmodule TakeANumber do
         loop(state)
     end
   end
-  defp machine(state) do
-    loop(state)
-  end
   def start() do
-    spawn(fn -> machine(0) end)
+    spawn(fn -> loop(@initial_state) end)
   end
 end
