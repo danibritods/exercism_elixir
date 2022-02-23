@@ -5,22 +5,14 @@ defmodule WineCellar do
     rose: "Fermented with some skin contact, but not enough to qualify as a red wine."]
   end
 
-  def filter(cellar, color, opts) when opts.country != nil and opts.year != nil do
-    filter(cellar,color)
-    |> filter_by_year(opts.year)
-    |> filter_by_year(opts.country)
-  end
-  def filter(cellar, color, opts) when opts.year != nil do
-    filter(cellar,color)
-    |> filter_by_year(opts.year)
-  end
-  def filter(cellar, color,opts) when opts.country != nil do
-    filter(cellar,color)
-    |> filter_by_year(opts.country)
-  end
   def filter(cellar, color, opts \\ []) do
     Keyword.get_values(cellar,color)
+    |> filter_by_year(opts[:year])
+    |> filter_by_country(opts[:country])
   end
+
+  defp filter_by_year(wines, nil), do: wines
+  defp filter_by_country(wines,nil), do: wines
 
   # The functions below do not need to be modified.
 
@@ -46,3 +38,6 @@ defmodule WineCellar do
     filter_by_country(tail, country)
   end
 end
+#I always go to community solutions to check possible improvements to my solution
+#But when refactoring mine,
+#I just could not unseen https://exercism.org/tracks/elixir/exercises/wine-cellar/solutions/iiiyu briliant solution.
