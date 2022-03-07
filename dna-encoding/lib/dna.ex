@@ -16,11 +16,20 @@ defmodule DNA do
      fn {_key, val} -> val == encoded_code end)
     |> elem(0)
   end
-  def encode(dna) do
-    # Please implement the encode/1 function
+
+  #def encode(dna), do: do_enconde(dna,<<>>)
+
+  def enconde(dna_char), do: do_enconde(dna_char)#,<<>>)
+
+  defp do_enconde(''), do: <<>>
+  defp do_enconde([h | t]) do
+    <<encode_nucleotide(h)::4, do_enconde(t)::bitstring>>
   end
 
-  def decode(dna) do
-    # Please implement the decode/1 function
+  def decode(dna_bit), do: do_decode(dna_bit)
+
+  defp do_decode(<<>>), do: ''
+  defp do_decode(<<h,t::bitstring>>) do
+    [h | do_decode(t)]
   end
 end
