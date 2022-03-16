@@ -29,7 +29,7 @@ defmodule DNA do
   def decode(dna_bit), do: do_decode(dna_bit)
 
   defp do_decode(<<>>), do: ''
-  defp do_decode(<<h,t::bitstring>>) do
-    [h | do_decode(t)]
+  defp do_decode(<<h::4,t::bitstring>>) do
+    [decode_nucleotide(h) | do_decode(t)]
   end
 end
