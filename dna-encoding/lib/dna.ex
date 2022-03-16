@@ -19,11 +19,11 @@ defmodule DNA do
 
   #def encode(dna), do: do_enconde(dna,<<>>)
 
-  def enconde(dna_char), do: do_enconde(dna_char)#,<<>>)
+  def encode(dna_char), do: do_encode(dna_char)#,<<>>)
 
-  defp do_enconde(''), do: <<>>
-  defp do_enconde([h | t]) do
-    <<encode_nucleotide(h)::4, do_enconde(t)::bitstring>>
+  defp do_encode(''), do: <<>>
+  defp do_encode([h | t]) do
+    <<encode_nucleotide(h)::4, do_encode(t)::bitstring>>
   end
 
   def decode(dna_bit), do: do_decode(dna_bit)
